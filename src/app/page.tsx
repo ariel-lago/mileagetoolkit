@@ -32,7 +32,6 @@ function parseDistanceInput(value: string): number | null {
 		"half marathon": 21.0975,
 		hm: 21.0975,
 		marathon: 42.195,
-		marathin: 42.195,
 		full: 42.195,
 		"full marathon": 42.195
 	};
@@ -232,8 +231,8 @@ export default function Home(): React.JSX.Element {
 	return (
 		<main className="shell">
 			<section className="hero">
-				<h1>Running Performance Toolkit</h1>
-				<p>Independent tools for race prediction, training paces, fueling, and conversions.</p>
+				<h1>Mileage Toolkit</h1>
+				<p>race prediction, training paces, fueling, and conversions</p>
 			</section>
 
 			<section className="panel">
@@ -549,144 +548,214 @@ export default function Home(): React.JSX.Element {
 				</div>
 			</section>
 			<style jsx>{`
-				.shell {
-					max-width: 980px;
-					margin: 0 auto;
-					padding: 3rem 1.5rem 6rem;
-					font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-					color: #09090b;
-					background-color: #ffffff;
+				@import url('https://googleapis.com');
+
+				/* --- ANIMACIONES ESTRUCTURALES --- */
+				@keyframes fadeInUp {
+					from {
+						opacity: 0;
+						transform: translateY(15px);
+					}
+					to {
+						opacity: 1;
+						transform: translateY(0);
+					}
 				}
 
+				@keyframes pulseOrb {
+					0%, 100% {
+						transform: scale(1) translate(0px, 0px);
+						opacity: 0.2;
+					}
+					50% {
+						transform: scale(1.15) translate(10px, -15px);
+						opacity: 0.35;
+					}
+				}
+
+				@keyframes pulseOrbDelayed {
+					0%, 100% {
+						transform: scale(1.1) translate(0px, 0px);
+						opacity: 0.15;
+					}
+					50% {
+						transform: scale(0.9) translate(-15px, 15px);
+						opacity: 0.3;
+					}
+				}
+
+				.shell {
+					max-width: 900px;
+					margin: 0 auto;
+					padding: 4rem 1.5rem 8rem;
+					font-family: 'Space Grotesk', sans-serif;
+					color: #000000;
+					background-color: #ffffff;
+					position: relative;
+					overflow: hidden;
+				}
+
+				/* --- ELEMENTOS BLURRY (AURAS LÍQUIDAS DE FONDO) --- */
+				.shell::before {
+					content: "";
+					position: absolute;
+					top: 15%;
+					right: -10%;
+					width: 350px;
+					height: 350px;
+					border-radius: 50%;
+					background: radial-gradient(circle, rgba(34,211,238,0.4) 0%, rgba(255,255,255,0) 70%);
+					filter: blur(60px);
+					z-index: 0;
+					pointer-events: none;
+					animation: pulseOrb 12s infinite ease-in-out;
+				}
+
+				.shell::after {
+					content: "";
+					position: absolute;
+					bottom: 25%;
+					left: -10%;
+					width: 400px;
+					height: 400px;
+					border-radius: 50%;
+					background: radial-gradient(circle, rgba(217,70,239,0.3) 0%, rgba(255,255,255,0) 70%);
+					filter: blur(80px);
+					z-index: 0;
+					pointer-events: none;
+					animation: pulseOrbDelayed 16s infinite ease-in-out;
+				}
+
+				/* --- AVANT-GARDE HERO HEADER --- */
 				.hero {
-					margin-bottom: 2.5rem;
-					padding: 2rem;
-					background: #ffffff;
-					border: 1px solid #e4e4e7;
-					border-radius: 1.5rem;
-					box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01);
+					margin-bottom: 5rem;
+					padding-bottom: 2rem;
+					border-b: 2px solid #000000;
+					position: relative;
+					z-index: 10;
+					animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 				}
 
 				.hero h1 {
-					font-size: 2rem;
+					font-family: 'Darker Grotesque', sans-serif;
+					font-size: 4.5rem;
 					font-weight: 900;
-					tracking: -0.05em;
+					line-height: 0.85;
+					letter-spacing: -0.06em;
 					text-transform: uppercase;
-					margin: 0 0 0.5rem;
-					color: #09090b;
+					margin: 0 0 1rem;
+					color: #000000;
 				}
 
 				.hero p {
-					font-size: 0.85rem;
+					font-family: 'Courier Prime', monospace;
+					font-size: 0.8rem;
 					color: #71717a;
 					margin: 0;
-					text-transform: uppercase;
-					letter-spacing: 0.05em;
+					text-transform: lowercase;
 				}
 
+				/* --- SECCIONES FLOTANTES (EFECTO SUBIDA AL CARGAR) --- */
 				.panel {
-					margin-top: 4rem; /* Espaciado elegante entre secciones */
-					padding: 0; /* Sin relleno artificial interno */
-					background: transparent; /* Eliminamos el fondo grisáceo */
-					border: none; /* Sin recuadros de contención */
-					box-shadow: none; /* Sin sombras pesadas de bloque */
+					margin-top: 5rem;
+					padding: 0;
+					background: transparent;
+					border: none;
+					box-shadow: none;
+					position: relative;
+					z-index: 10;
+					animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 				}
+				
+				.panel:nth-of-type(2) { animation-delay: 0.1s; }
+				.panel:nth-of-type(3) { animation-delay: 0.2s; }
+				.panel:nth-of-type(4) { animation-delay: 0.3s; }
 
 				.panel h2 {
-					font-size: 0.75rem;
+					font-family: 'Courier Prime', monospace;
+					font-size: 0.8rem;
 					font-weight: 700;
 					text-transform: uppercase;
-					letter-spacing: 0.15em;
-					color: #71717a;
+					letter-spacing: 0.1em;
+					color: #000000;
 					margin: 0 0 2rem;
-					display: flex;
-					align-items: center;
-					gap: 0.5rem;
-				}
-
-				.panel h2::before {
-					content: "";
-					display: inline-block;
-					width: 6px;
-					height: 6px;
-					border-radius: 50%;
-					background-color: #09090b;
+					border-bottom: 1px dashed #e4e4e7;
+					padding-bottom: 0.5rem;
 				}
 
 				.grid {
 					display: grid;
-					grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-					gap: 1.25rem;
-					margin-bottom: 2rem;
+					grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+					gap: 1.5rem;
+					margin-bottom: 2.5rem;
 				}
 
 				label {
 					display: flex;
 					flex-direction: column;
-					font-size: 0.65rem;
+					font-family: 'Space Grotesk', sans-serif;
+					font-size: 0.75rem;
 					text-transform: uppercase;
 					letter-spacing: 0.05em;
 					font-weight: 700;
-					color: #a1a1aa;
+					color: #71717a;
 					gap: 0.5rem;
 				}
 
+				/* Cajas de entrada reactivas con micro-interacciones */
 				input[type="text"],
 				input[type="number"] {
-					padding: 0.85rem 1rem;
-					background: rgba(244, 244, 245, 0.6);
-					border: 1px solid #e4e4e7;
-					border-radius: 1rem;
-					font-size: 0.95rem;
-					font-family: inherit;
-					color: #09090b;
-					transition: all 0.2s ease;
-					box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+					padding: 0.75rem 0.5rem;
+					background: rgba(255, 255, 255, 0.8);
+					border: 2px solid #000000;
+					border-radius: 0px;
+					font-size: 1rem;
+					font-family: 'Space Grotesk', sans-serif;
+					font-weight: 700;
+					color: #000000;
+					transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 				}
 
 				input:focus {
 					outline: none;
-					border-color: #09090b;
 					background: #ffffff;
+					transform: translateY(-2px);
+					box-shadow: 6px 6px 0px #000000; /* Sombra pop-art aumentada */
 				}
 
+				/* Control deslizante suave */
 				.sliderWrap {
-					margin: 2rem 0;
-					background: rgba(244, 244, 245, 0.5);
-					padding: 1.5rem;
-					border-radius: 1.25rem;
-					border: 1px solid #e4e4e7;
+					margin: 2.5rem 0;
 				}
 
 				input[type="range"] {
 					-webkit-appearance: none;
 					width: 100%;
-					height: 4px;
-					background: #e4e4e7;
-					border-radius: 2px;
+					height: 2px;
+					background: #000000;
 					outline: none;
 				}
 
 				input[type="range"]::-webkit-slider-thumb {
 					-webkit-appearance: none;
-					width: 16px;
-					height: 16px;
-					border-radius: 50%;
-					background: #09090b;
+					width: 14px;
+					height: 14px;
+					background: #000000;
+					border: 2px solid #ffffff;
 					cursor: pointer;
-					transition: transform 0.1s;
+					transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 				}
 
 				input[type="range"]::-webkit-slider-thumb:hover {
-					transform: scale(1.2);
+					transform: scale(1.4);
 				}
 
 				.ticks {
 					display: grid;
 					grid-template-columns: repeat(5, minmax(0, 1fr));
 					margin-top: 0.75rem;
-					font-size: 0.65rem;
-					text-transform: uppercase;
+					font-family: 'Courier Prime', monospace;
+					font-size: 0.7rem;
 				}
 
 				.ticks span {
@@ -696,106 +765,119 @@ export default function Home(): React.JSX.Element {
 				}
 
 				.ticks .active {
-					color: #09090b;
-					font-weight: 900;
+					color: #000000;
+					font-weight: 700;
+					text-decoration: underline;
 				}
 
+				/* --- TARJETAS SALIDA FLOTANTES --- */
 				.cards {
 					display: grid;
-					gap: 1rem;
+					gap: 1.5rem;
 					grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-					margin-top: 1.5rem;
+					margin-top: 2rem;
 				}
-								/* --- CONTENEDORES FLOTANTES (SIN BORDES NI FONDOS GRISES) --- */
+
 				.card {
-					padding: 1.5rem 0; /* Eliminamos el cojín lateral */
-					background: transparent; /* Todo flota en el blanco */
-					border: none; /* Sin recuadros */
-					box-shadow: none; /* Sin sombras externas */
+					padding: 1rem 0;
+					background: transparent;
+					border: none;
 					position: relative;
+					transition: transform 0.3s ease;
+				}
+
+				/* Micro-reacción al pasar el ratón por encima de los datos flotantes */
+				.card:hover {
+					transform: translateX(4px);
 				}
 
 				.card h3 {
-					font-size: 0.65rem;
-					margin: 0 0 0.5rem;
+					font-family: 'Courier Prime', monospace;
+					font-size: 0.7rem;
+					margin: 0;
 					text-transform: uppercase;
 					color: #a1a1aa;
-					letter-spacing: 0.05em;
 				}
 
-				/* El rango superior ahora es texto plano y limpio en el aire */
 				.card p {
-					font-size: 1.25rem;
-					font-weight: 400;
-					margin: 0;
-					color: #71717a;
+					font-family: 'Space Grotesk', sans-serif;
+					font-size: 1.75rem;
+					font-weight: 700;
+					margin: 0.25rem 0 0;
+					color: #000000;
+					letter-spacing: -0.04em;
 				}
 
-				/* --- EL TEMPORIZADOR LED ROJO OFICIAL --- */
-				/* Estiliza la predicción central exacta (00:00:00) como un display digital */
-				.panel:nth-of-type(2) .card small {
-					font-family: 'Courier New', Courier, monospace;
-					font-size: 1.5rem;
-					font-weight: 900;
-					color: #ff3333;
-					background: #000000;
-					padding: 0.5rem 1rem;
-					border-radius: 0.5rem;
-					display: inline-block;
-					letter-spacing: 0.08em;
-					box-shadow: 
-						inset 0 3px 8px rgba(0, 0, 0, 0.9),
-						0 0 15px rgba(255, 51, 51, 0.15);
-					border: 1px solid rgba(255, 51, 51, 0.2);
-					margin-top: 0.75rem;
-				}
-
-				/* Para los textos normales de los otros módulos, mantenemos su tamaño limpio */
-				.panel:not(nth-of-type(2)) .card small {
+				.card small {
+					font-family: 'Courier Prime', monospace;
 					font-size: 0.85rem;
 					color: #71717a;
+					display: block;
+					margin-top: 0.25rem;
 				}
 
+				/* --- EL RELOJ DE META LED ROJO --- */
+				.panel:nth-of-type(2) .card small {
+					font-family: 'Courier New', Courier, monospace;
+					font-size: 1.6rem;
+					font-weight: 900;
+					color: #ff2222;
+					background: #000000;
+					padding: 0.5rem 1rem;
+					border-radius: 4px;
+					display: inline-block;
+					letter-spacing: 0.06em;
+					box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.9);
+					border: 1px solid #331111;
+					margin-top: 0.5rem;
+					text-shadow: 0 0 10px rgba(255, 34, 34, 0.8);
+					animation: pulse 2s infinite alternate; /* Efecto de parpadeo leve de marcador real */
+				}
+
+				/* Tablas de ritmos limpias */
 				.paceTable {
 					display: grid;
-					gap: 0.5rem;
+					gap: 0.25rem;
 					margin-top: 1.5rem;
 				}
 
 				.paceRow {
 					display: grid;
-					grid-template-columns: 140px 1fr 1fr;
+					grid-template-columns: 150px 1fr 1fr;
 					gap: 1rem;
-					padding: 0.85rem 1.25rem;
-					background: rgba(255, 255, 255, 0.6);
-					border: 1px solid #e4e4e7;
-					border-radius: 1rem;
-					font-size: 0.85rem;
-					align-items: center;
+					padding: 0.75rem 0;
+					border-bottom: 1px solid #f4f4f5;
+					font-size: 0.9rem;
+					transition: background 0.2s ease;
+				}
+
+				.paceRow:hover {
+					background: rgba(244, 244, 245, 0.4);
+					padding-left: 0.5rem;
 				}
 
 				.paceRow strong {
-					font-size: 0.7rem;
+					font-family: 'Courier Prime', monospace;
+					font-size: 0.75rem;
 					text-transform: uppercase;
-					letter-spacing: 0.05em;
-					color: #09090b;
+					color: #000000;
 				}
 
 				.toolError {
 					margin-top: 1.5rem;
-					padding: 1rem;
-					border-radius: 1rem;
+					padding: 0.75rem;
+					font-family: 'Courier Prime', monospace;
 					font-size: 0.75rem;
-					color: #a94442;
-					background: #fef2f2;
-					border: 1px solid #fca5a5;
+					color: #ffffff;
+					background: #000000;
 					text-transform: uppercase;
+					box-shadow: 4px 4px 0px #ef4444;
 				}
 
 				@media (max-width: 700px) {
 					.paceRow {
 						grid-template-columns: 1fr;
-						gap: 0.25rem;
+						padding: 0.5rem 0;
 					}
 				}
 			`}</style>
