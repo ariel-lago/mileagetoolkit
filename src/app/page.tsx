@@ -548,134 +548,254 @@ export default function Home(): React.JSX.Element {
 					</article>
 				</div>
 			</section>
-
 			<style jsx>{`
 				.shell {
 					max-width: 980px;
 					margin: 0 auto;
-					padding: 2rem 1rem 4rem;
-					font-family: "Avenir Next", "Trebuchet MS", sans-serif;
-					color: #1d2a2e;
+					padding: 3rem 1.5rem 6rem;
+					font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+					color: #09090b;
+					background-color: #ffffff;
 				}
 
 				.hero {
-					margin-bottom: 1rem;
-					padding: 1rem 1.25rem;
-					background: linear-gradient(120deg, #f9f6ef, #eef8f5);
-					border: 1px solid #d8e5df;
-					border-radius: 14px;
+					margin-bottom: 2.5rem;
+					padding: 2rem;
+					background: #ffffff;
+					border: 1px solid #e4e4e7;
+					border-radius: 1.5rem;
+					box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01);
+				}
+
+				.hero h1 {
+					font-size: 2rem;
+					font-weight: 900;
+					tracking: -0.05em;
+					text-transform: uppercase;
+					margin: 0 0 0.5rem;
+					color: #09090b;
+				}
+
+				.hero p {
+					font-size: 0.85rem;
+					color: #71717a;
+					margin: 0;
+					text-transform: uppercase;
+					letter-spacing: 0.05em;
 				}
 
 				.panel {
-					margin-top: 1rem;
-					padding: 1.25rem;
-					background: #ffffff;
-					border: 1px solid #dbe5e9;
-					border-radius: 14px;
-					box-shadow: 0 6px 24px rgba(25, 50, 45, 0.06);
+					margin-top: 4rem; /* Espaciado elegante entre secciones */
+					padding: 0; /* Sin relleno artificial interno */
+					background: transparent; /* Eliminamos el fondo grisáceo */
+					border: none; /* Sin recuadros de contención */
+					box-shadow: none; /* Sin sombras pesadas de bloque */
 				}
 
-				.error {
-					color: #8c1f1f;
-					background: #fff3f3;
-					border-color: #f0c9c9;
+				.panel h2 {
+					font-size: 0.75rem;
+					font-weight: 700;
+					text-transform: uppercase;
+					letter-spacing: 0.15em;
+					color: #71717a;
+					margin: 0 0 2rem;
+					display: flex;
+					align-items: center;
+					gap: 0.5rem;
 				}
 
-				.toolError {
-					margin-top: 1rem;
-					padding: 0.7rem;
-					border-radius: 8px;
-					color: #8c1f1f;
-					background: #fff3f3;
-					border: 1px solid #f0c9c9;
+				.panel h2::before {
+					content: "";
+					display: inline-block;
+					width: 6px;
+					height: 6px;
+					border-radius: 50%;
+					background-color: #09090b;
 				}
 
 				.grid {
 					display: grid;
-					grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-					gap: 0.75rem;
+					grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+					gap: 1.25rem;
+					margin-bottom: 2rem;
 				}
 
 				label {
 					display: flex;
 					flex-direction: column;
-					font-size: 0.9rem;
-					gap: 0.35rem;
+					font-size: 0.65rem;
+					text-transform: uppercase;
+					letter-spacing: 0.05em;
+					font-weight: 700;
+					color: #a1a1aa;
+					gap: 0.5rem;
 				}
 
-				input {
-					padding: 0.5rem 0.6rem;
-					border: 1px solid #bfd1c9;
-					border-radius: 8px;
+				input[type="text"],
+				input[type="number"] {
+					padding: 0.85rem 1rem;
+					background: rgba(244, 244, 245, 0.6);
+					border: 1px solid #e4e4e7;
+					border-radius: 1rem;
 					font-size: 0.95rem;
+					font-family: inherit;
+					color: #09090b;
+					transition: all 0.2s ease;
+					box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+				}
+
+				input:focus {
+					outline: none;
+					border-color: #09090b;
+					background: #ffffff;
 				}
 
 				.sliderWrap {
-					margin-top: 1rem;
+					margin: 2rem 0;
+					background: rgba(244, 244, 245, 0.5);
+					padding: 1.5rem;
+					border-radius: 1.25rem;
+					border: 1px solid #e4e4e7;
 				}
 
-				#effort {
+				input[type="range"] {
+					-webkit-appearance: none;
 					width: 100%;
+					height: 4px;
+					background: #e4e4e7;
+					border-radius: 2px;
+					outline: none;
+				}
+
+				input[type="range"]::-webkit-slider-thumb {
+					-webkit-appearance: none;
+					width: 16px;
+					height: 16px;
+					border-radius: 50%;
+					background: #09090b;
+					cursor: pointer;
+					transition: transform 0.1s;
+				}
+
+				input[type="range"]::-webkit-slider-thumb:hover {
+					transform: scale(1.2);
 				}
 
 				.ticks {
 					display: grid;
 					grid-template-columns: repeat(5, minmax(0, 1fr));
-					margin-top: 0.35rem;
-					font-size: 0.8rem;
-					gap: 0.5rem;
+					margin-top: 0.75rem;
+					font-size: 0.65rem;
+					text-transform: uppercase;
 				}
 
 				.ticks span {
 					text-align: center;
-					color: #61757b;
+					color: #a1a1aa;
+					transition: color 0.2s ease;
 				}
 
 				.ticks .active {
-					color: #0a5b4b;
-					font-weight: 700;
+					color: #09090b;
+					font-weight: 900;
 				}
 
 				.cards {
 					display: grid;
-					gap: 0.8rem;
-					grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+					gap: 1rem;
+					grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+					margin-top: 1.5rem;
 				}
-
+								/* --- CONTENEDORES FLOTANTES (SIN BORDES NI FONDOS GRISES) --- */
 				.card {
-					padding: 0.85rem;
-					background: #f6fbfa;
-					border: 1px solid #d6e7e2;
-					border-radius: 10px;
+					padding: 1.5rem 0; /* Eliminamos el cojín lateral */
+					background: transparent; /* Todo flota en el blanco */
+					border: none; /* Sin recuadros */
+					box-shadow: none; /* Sin sombras externas */
+					position: relative;
 				}
 
+				.card h3 {
+					font-size: 0.65rem;
+					margin: 0 0 0.5rem;
+					text-transform: uppercase;
+					color: #a1a1aa;
+					letter-spacing: 0.05em;
+				}
+
+				/* El rango superior ahora es texto plano y limpio en el aire */
 				.card p {
-					font-size: 1.2rem;
-					margin: 0.3rem 0;
-					color: #0f4d41;
+					font-size: 1.25rem;
+					font-weight: 400;
+					margin: 0;
+					color: #71717a;
+				}
+
+				/* --- EL TEMPORIZADOR LED ROJO OFICIAL --- */
+				/* Estiliza la predicción central exacta (00:00:00) como un display digital */
+				.panel:nth-of-type(2) .card small {
+					font-family: 'Courier New', Courier, monospace;
+					font-size: 1.5rem;
+					font-weight: 900;
+					color: #ff3333;
+					background: #000000;
+					padding: 0.5rem 1rem;
+					border-radius: 0.5rem;
+					display: inline-block;
+					letter-spacing: 0.08em;
+					box-shadow: 
+						inset 0 3px 8px rgba(0, 0, 0, 0.9),
+						0 0 15px rgba(255, 51, 51, 0.15);
+					border: 1px solid rgba(255, 51, 51, 0.2);
+					margin-top: 0.75rem;
+				}
+
+				/* Para los textos normales de los otros módulos, mantenemos su tamaño limpio */
+				.panel:not(nth-of-type(2)) .card small {
+					font-size: 0.85rem;
+					color: #71717a;
 				}
 
 				.paceTable {
 					display: grid;
-					gap: 0.4rem;
+					gap: 0.5rem;
+					margin-top: 1.5rem;
 				}
 
 				.paceRow {
 					display: grid;
-					grid-template-columns: 110px 1fr 1fr;
-					gap: 0.6rem;
-					padding: 0.55rem;
-					background: #f9fafc;
-					border-radius: 8px;
+					grid-template-columns: 140px 1fr 1fr;
+					gap: 1rem;
+					padding: 0.85rem 1.25rem;
+					background: rgba(255, 255, 255, 0.6);
+					border: 1px solid #e4e4e7;
+					border-radius: 1rem;
+					font-size: 0.85rem;
+					align-items: center;
+				}
+
+				.paceRow strong {
+					font-size: 0.7rem;
+					text-transform: uppercase;
+					letter-spacing: 0.05em;
+					color: #09090b;
+				}
+
+				.toolError {
+					margin-top: 1.5rem;
+					padding: 1rem;
+					border-radius: 1rem;
+					font-size: 0.75rem;
+					color: #a94442;
+					background: #fef2f2;
+					border: 1px solid #fca5a5;
+					text-transform: uppercase;
 				}
 
 				@media (max-width: 700px) {
 					.paceRow {
 						grid-template-columns: 1fr;
-					}
-
-					.paceRow strong {
-						text-transform: capitalize;
+						gap: 0.25rem;
 					}
 				}
 			`}</style>
