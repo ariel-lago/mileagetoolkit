@@ -8,7 +8,7 @@ import { LedTime } from "./LedTime";
 const raceDistanceOptions = [
 	{ label: "5K", value: "5k" },
 	{ label: "10K", value: "10k" },
-	{ label: "Half marathon", value: "half" },
+	{ label: "Half", value: "half" },
 	{ label: "Marathon", value: "marathon" }
 ];
 
@@ -17,7 +17,8 @@ export function RacePanel(): React.JSX.Element {
 	const [finishTime, setFinishTime] = useState("");
 
 	const raceTool = useMemo(() => {
-		const clock = readRaceClock(finishTime);
+		const longRace = selectedRaceDistance === "half" || selectedRaceDistance === "marathon";
+		const clock = readRaceClock(finishTime, longRace);
 		const digitsOnly = !finishTime.includes(":") && finishTime.replace(/\D/g, "").length < 5;
 		if (clock.status === "empty" || digitsOnly) {
 			return { ok: false as const };
@@ -41,8 +42,6 @@ export function RacePanel(): React.JSX.Element {
 
 		return {
 			ok: true as const,
-			knownDistanceKm,
-			knownTimeSeconds: totalSeconds,
 			predictions,
 			paces
 		};
@@ -91,15 +90,12 @@ export function RacePanel(): React.JSX.Element {
 				<p className="toolError">{raceTool.error}</p>
 			) : raceTool.ok ? (
 				<div className="scoreboard">
-					<p className="scoreboardMeta">
-						{raceTool.knownDistanceKm} km in {formatDuration(raceTool.knownTimeSeconds)}
-					</p>
 					<div className="clocks">
 						{(
 							[
 								["5K", raceTool.predictions.fiveK],
 								["10K", raceTool.predictions.tenK],
-								["Half marathon", raceTool.predictions.halfMarathon],
+								["Half", raceTool.predictions.halfMarathon],
 								["Marathon", raceTool.predictions.marathon]
 							] as const
 						).map(([label, prediction]) => {

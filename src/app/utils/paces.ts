@@ -98,13 +98,17 @@ export function calculateTrainingPaces(
 		interval
 	];
 
-	const zones: TrainingPaceZone[] = zoneInputs.map((zone) => ({
-		name: zone.name,
-		secondsPerKmLow: zone.low,
-		secondsPerKmHigh: zone.high,
-		labelPerKm: formatPaceRangePerKm(zone.low, zone.high),
-		labelPerMile: formatPaceRangePerMile(zone.low, zone.high)
-	}));
+	const zones: TrainingPaceZone[] = zoneInputs.map((zone) => {
+		const low = Math.max(1, Math.min(zone.low, zone.high));
+		const high = Math.max(low, zone.low, zone.high);
+		return {
+			name: zone.name,
+			secondsPerKmLow: low,
+			secondsPerKmHigh: high,
+			labelPerKm: formatPaceRangePerKm(low, high),
+			labelPerMile: formatPaceRangePerMile(low, high)
+		};
+	});
 
 	return {
 		basePaceSecondsPerKm,

@@ -57,7 +57,7 @@ body {
 	width: 350px;
 	height: 350px;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(34,211,238,0.4) 0%, rgba(255,255,255,0) 70%);
+	background: radial-gradient(circle, rgba(112, 190, 250, 0.4) 0%, rgba(255,255,255,0) 70%);
 	filter: blur(60px);
 	z-index: 0;
 	pointer-events: none;
@@ -91,28 +91,12 @@ body {
 .heroTitle {
 	font-family: var(--font-sans), sans-serif;
 	font-size: 4.5rem;
-	font-weight: 700;
+	font-weight: 800;
 	line-height: 0.9;
-	letter-spacing: -0.06em;
-	text-transform: uppercase;
-	margin: 0 0 1rem;
-	color: #111111;
-}
-
-.hero::after {
-	content: "";
-	display: block;
-	height: 2px;
-	margin-top: 1.4rem;
-	background: linear-gradient(90deg, #111111 0%, #ff4d9a 42%, rgba(147, 197, 253, 0) 100%);
-}
-
-.hero p {
-	font-family: var(--font-sans), sans-serif;
-	font-size: 0.8rem;
-	color: #71717a;
+	letter-spacing: -0.05em;
+	text-transform: none;
 	margin: 0;
-	text-transform: lowercase;
+	color: #ff4d9a;
 }
 
 /* --- SECCIONES FLOTANTES (EFECTO SUBIDA AL CARGAR) --- */
@@ -209,7 +193,7 @@ label {
 	letter-spacing: 0.04em;
 	text-align: center;
 	text-transform: uppercase;
-	color: #1e3a5f;
+	color: #16629c;
 	background: transparent;
 	border: none;
 	border-radius: 999px;
@@ -224,7 +208,7 @@ label {
 	position: absolute;
 	inset: 0.15rem 0.05rem;
 	border-radius: 999px;
-	background: rgba(147, 197, 253, 0.8);
+	background: rgba(112, 190, 250, 0.85);
 	filter: blur(8px);
 	z-index: -1;
 }
@@ -234,7 +218,7 @@ label {
 }
 
 .distanceButtons button:hover:not(.active)::before {
-	background: rgba(96, 165, 250, 0.9);
+	background: rgba(112, 190, 250, 0.95);
 }
 
 .distanceButtons button.active {
@@ -262,18 +246,18 @@ input[type="number"] {
 	font-family: var(--font-sans), sans-serif;
 	font-weight: 700;
 	color: #000000;
-	box-shadow: inset 0 0 0 1.5px rgba(96, 165, 250, 0.8), 0 0 14px 1px rgba(147, 197, 253, 0.35);
+	box-shadow: inset 0 0 0 1.5px rgba(112, 190, 250, 0.9), 0 0 14px 1px rgba(112, 190, 250, 0.4);
 	transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, box-shadow 0.25s ease;
 }
 
 input:not([data-filled="true"]):focus {
-	box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.95), 0 0 16px 3px rgba(147, 197, 253, 0.45);
+	box-shadow: inset 0 0 0 2px rgba(112, 190, 250, 0.95), 0 0 16px 3px rgba(112, 190, 250, 0.5);
 }
 
 input[data-filled="true"] {
 	min-width: 0;
 	box-shadow: none;
-	background: radial-gradient(ellipse 92% 78% at center, rgba(186, 230, 253, 0.95) 0%, rgba(186, 230, 253, 0.4) 58%, rgba(186, 230, 253, 0) 80%);
+	background: radial-gradient(ellipse 92% 78% at center, rgba(112, 190, 250, 0.62) 0%, rgba(112, 190, 250, 0.28) 58%, rgba(112, 190, 250, 0) 80%);
 }
 
 input:focus {
@@ -282,7 +266,7 @@ input:focus {
 }
 
 input[data-filled="true"]:focus {
-	background: radial-gradient(ellipse 92% 78% at center, rgba(147, 197, 253, 0.98) 0%, rgba(147, 197, 253, 0.45) 58%, rgba(147, 197, 253, 0) 82%);
+	background: radial-gradient(ellipse 92% 78% at center, rgba(112, 190, 250, 0.78) 0%, rgba(112, 190, 250, 0.34) 58%, rgba(112, 190, 250, 0) 82%);
 }
 
 /* Control deslizante suave */
@@ -310,10 +294,20 @@ input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	width: 14px;
 	height: 14px;
-	background: #000000;
+	background: #ff4d9a;
 	border: 2px solid #ffffff;
+	border-radius: 999px;
 	cursor: pointer;
 	transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+input[type="range"]::-moz-range-thumb {
+	width: 14px;
+	height: 14px;
+	background: #ff4d9a;
+	border: 2px solid #ffffff;
+	border-radius: 999px;
+	cursor: pointer;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
@@ -345,9 +339,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .ticks button.active {
-	color: #c2176a;
+	color: #ff4d9a;
 	font-weight: 700;
-	box-shadow: 0 0 16px rgba(244, 114, 182, 0.85);
+	box-shadow: 0 0 16px rgba(112, 190, 250, 0.95);
 }
 
 /* --- TARJETAS SALIDA FLOTANTES --- */
@@ -416,16 +410,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
 	margin-top: 2rem;
 	padding: 0;
 	background: transparent;
-}
-
-.scoreboardMeta {
-	margin: 0 0 1.25rem;
-	text-align: center;
-	font-family: var(--font-sans), sans-serif;
-	font-size: 0.75rem;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-	color: #71717a;
 }
 
 .clocks {
@@ -692,7 +676,7 @@ input.clockInputField {
 	padding: 0.7rem 1rem;
 	font-family: var(--font-sans), sans-serif;
 	font-size: 0.75rem;
-	color: #1e3a5f;
+	color: #16629c;
 	background: transparent;
 	border-radius: 999px;
 	text-transform: uppercase;
@@ -704,7 +688,7 @@ input.clockInputField {
 	position: absolute;
 	inset: 0;
 	border-radius: 999px;
-	background: rgba(147, 197, 253, 0.65);
+	background: rgba(112, 190, 250, 0.7);
 	filter: blur(14px);
 	z-index: -1;
 }

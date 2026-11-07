@@ -25,7 +25,7 @@ export function CarbPanel(): React.JSX.Element {
 
 		const parsedDuration = parseDurationField(duration);
 		if (!parsedDuration) {
-			return { ok: false as const, error: "Duration looks like 1:30 or 90 minutes." };
+			return { ok: false as const, error: "Use minutes, like 66, or a time like 1:06." };
 		}
 
 		const effortDurationMinutes = parsedDuration.hours * 60 + parsedDuration.minutes;
@@ -58,7 +58,7 @@ export function CarbPanel(): React.JSX.Element {
 						onFocus={(event) => event.currentTarget.select()}
 						{...fieldLook(duration)}
 					/>
-					<span className="clockHint">hh:mm</span>
+					<span className="clockHint">66 or 1:06</span>
 				</label>
 			</div>
 

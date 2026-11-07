@@ -90,7 +90,7 @@ export function clockDisplay(digits: string): string {
 	return `${padded.slice(0, 2)}:${padded.slice(2, 4)}:${padded.slice(4, 6)}`;
 }
 
-function clockParts(raw: string): [number, number, number] | null {
+function clockParts(raw: string, hoursAndMinutes: boolean): [number, number, number] | null {
 	const cleaned = raw.trim().replace(/[^\d:]/g, "");
 	if (!cleaned) {
 		return null;
@@ -107,21 +107,27 @@ function clockParts(raw: string): [number, number, number] | null {
 		return [Number(digits.slice(0, -4)), Number(digits.slice(-4, -2)), Number(digits.slice(-2))];
 	}
 
-	const groups = cleaned.split(":").slice(0, 3).map((part) => part.slice(0, 2));
-	if (groups.length === 1) {
-		return [0, Number(groups[0] || "0"), 0];
+	const groups = cleaned.split(":").slice(0, 3);
+	const lastGroup = groups[groups.length - 1] ?? "";
+	if (groups.some((part) => part.length === 0) || lastGroup.length < 2) {
+		return null;
+	}
+
+	const nums = groups.map((part) => Number(part.slice(0, 2)));
+	if (groups.length === 2 && hoursAndMinutes) {
+		return [nums[0], nums[1], 0];
 	}
 	if (groups.length === 2) {
-		return [0, Number(groups[0] || "0"), Number(groups[1] || "0")];
+		return [0, nums[0], nums[1]];
 	}
-	return [Number(groups[0] || "0"), Number(groups[1] || "0"), Number(groups[2] || "0")];
+	return [nums[0], nums[1] ?? 0, nums[2] ?? 0];
 }
 
-export function readRaceClock(raw: string):
+export function readRaceClock(raw: string, hoursAndMinutes = false):
 	| { status: "empty"; display: string }
 	| { status: "invalid"; error: string; display: string }
 	| { status: "ok"; totalSeconds: number; display: string } {
-	const parts = clockParts(raw);
+	const parts = clockParts(raw, hoursAndMinutes);
 	if (!parts) {
 		return { status: "empty", display: "00:00:00" };
 	}
@@ -159,24 +165,15 @@ export function parseDurationField(value: string): { hours: number; minutes: num
 		return { hours, minutes };
 	}
 
-	const digits = trimmed.replace(/\D/g, "");
-	if (!digits) {
+	const minutesTotal = Number(trimmed);
+	if (!Number.isFinite(minutesTotal) || minutesTotal < 0) {
 		return null;
-	}
-	if (digits.length <= 2) {
-		const minutes = Number(digits);
-		if (minutes >= 60) {
-			return null;
-		}
-		return { hours: 0, minutes };
 	}
 
-	const minutes = Number(digits.slice(-2));
-	const hours = Number(digits.slice(0, -2));
-	if (minutes >= 60) {
-		return null;
-	}
-	return { hours, minutes };
+	return {
+		hours: Math.floor(minutesTotal / 60),
+		minutes: minutesTotal % 60
+	};
 }
 
 export function parsePaceField(value: string): number {

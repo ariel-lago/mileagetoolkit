@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Syne } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
-const grotesk = Space_Grotesk({
+const syne = Syne({
 	subsets: ["latin"],
-	weight: ["500", "600", "700"],
+	weight: ["500", "600", "700", "800"],
 	variable: "--font-sans"
 });
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }): React.JSX.Element {
 	return (
-		<html lang="en" className={grotesk.variable}>
+		<html lang="en" className={syne.variable}>
 			<body>{children}</body>
 		</html>
 	);

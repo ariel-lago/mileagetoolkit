@@ -9,7 +9,6 @@ export default function Home(): React.JSX.Element {
 		<main className="shell">
 			<section className="hero">
 				<h1 className="heroTitle">Mileage Toolkit</h1>
-				<p>one result for race clocks and training paces, plus fueling and conversions</p>
 			</section>
 			<RacePanel />
 			<CarbPanel />
