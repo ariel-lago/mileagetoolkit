@@ -17,6 +17,31 @@ const SEGMENT_ON: Record<string, string> = {
 	"9": "abcdfg"
 };
 
+const LETTERS: Record<string, Array<[number, number, number, number]>> = {
+	G: [
+		[12, 3, 36, 14],
+		[4, 14, 14, 76],
+		[12, 87, 36, 14],
+		[42, 52, 14, 40],
+		[26, 46, 22, 14]
+	],
+	I: [
+		[10, 3, 40, 14],
+		[23, 14, 14, 76],
+		[10, 87, 40, 14]
+	],
+	R: [
+		[4, 3, 14, 98],
+		[14, 3, 30, 14],
+		[42, 14, 14, 28],
+		[14, 40, 30, 14]
+	],
+	L: [
+		[6, 3, 14, 98],
+		[6, 87, 48, 14]
+	]
+};
+
 const SEGMENTS: Record<string, [number, number, number, number]> = {
 	a: [16, 3, 28, 14],
 	b: [42, 16, 14, 32],
@@ -58,6 +83,42 @@ function Digit({ char }: { char: string }): React.JSX.Element {
 	);
 }
 
+function Letter({ char }: { char: string }): React.JSX.Element {
+	const patternId = `led-${useId().replace(/:/g, "")}`;
+	const bars = LETTERS[char] ?? [];
+
+	return (
+		<svg className="ledGlyph" viewBox="0 0 60 104" aria-hidden="true">
+			<defs>
+				<pattern id={patternId} width="3" height="3" patternUnits="userSpaceOnUse">
+					<rect width="3" height="1.15" fill={LED_PINK} />
+				</pattern>
+			</defs>
+			{bars.map(([x, y, width, height]) => (
+				<rect key={`${x}-${y}`} className="ledOn" x={x} y={y} width={width} height={height} fill={`url(#${patternId})`} />
+			))}
+			{char === "R" ? (
+				<polygon className="ledOn" points="18,50 32,50 54,100 40,100" fill={`url(#${patternId})`} />
+			) : null}
+		</svg>
+	);
+}
+
+function Dot(): React.JSX.Element {
+	const patternId = `led-${useId().replace(/:/g, "")}`;
+
+	return (
+		<svg className="ledDot" viewBox="0 0 16 104" aria-hidden="true">
+			<defs>
+				<pattern id={patternId} width="3" height="3" patternUnits="userSpaceOnUse">
+					<rect width="3" height="1.15" fill={LED_PINK} />
+				</pattern>
+			</defs>
+			<rect className="ledOn" x="2" y="86" width="12" height="14" rx="1" fill={`url(#${patternId})`} />
+		</svg>
+	);
+}
+
 function Colon(): React.JSX.Element {
 	const patternId = `led-${useId().replace(/:/g, "")}`;
 
@@ -77,9 +138,18 @@ function Colon(): React.JSX.Element {
 export function LedTime({ time, size = "md" }: { time: string; size?: "md" | "sm" }): React.JSX.Element {
 	return (
 		<div className="ledTime" data-size={size}>
-			{time.split("").map((char, index) =>
-				char === ":" ? <Colon key={`${char}-${index}`} /> : <Digit key={`${char}-${index}`} char={char} />
-			)}
+			{time.split("").map((char, index) => {
+				if (char === ":") {
+					return <Colon key={`${char}-${index}`} />;
+				}
+				if (char === ".") {
+					return <Dot key={`${char}-${index}`} />;
+				}
+				if (char in LETTERS) {
+					return <Letter key={`${char}-${index}`} char={char} />;
+				}
+				return <Digit key={`${char}-${index}`} char={char} />;
+			})}
 			<style jsx>{`
 				.ledTime {
 					display: flex;
@@ -102,7 +172,8 @@ export function LedTime({ time, size = "md" }: { time: string; size?: "md" | "sm
 				}
 
 				.ledTime[data-size="sm"] :global(svg),
-				.ledTime[data-size="sm"] :global(.ledColon) {
+				.ledTime[data-size="sm"] :global(.ledColon),
+				.ledTime[data-size="sm"] :global(.ledDot) {
 					height: 42px;
 				}
 

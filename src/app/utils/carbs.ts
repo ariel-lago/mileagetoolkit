@@ -41,15 +41,21 @@ export function calculateCarbFueling(
 	let carbsPerHourLow = 30;
 	let carbsPerHourHigh = 45;
 
-	if (effortDurationMinutes < 60) {
+	if (effortDurationMinutes < 30) {
+		shouldFuelDuringSession = false;
+		isFuelingOptional = false;
+		carbsPerHourLow = 0;
+		carbsPerHourHigh = 0;
+	} else if (effortDurationMinutes < 60) {
 		shouldFuelDuringSession = false;
 		isFuelingOptional = true;
 		carbsPerHourLow = 0;
 		carbsPerHourHigh = 30;
 	} else if (effortDurationMinutes <= 75 && sessionIntensity === "easy") {
 		shouldFuelDuringSession = false;
+		isFuelingOptional = true;
 		carbsPerHourLow = 0;
-		carbsPerHourHigh = 0;
+		carbsPerHourHigh = 30;
 	} else if (effortDurationMinutes < 75 && sessionIntensity === "steady") {
 		shouldFuelDuringSession = false;
 		isFuelingOptional = true;
@@ -196,14 +202,14 @@ export function calculateCarbFueling(
 		: isFuelingOptional
 			? effortDurationMinutes < 60
 				? "For any effort under 60 minutes, in-session carbs are optional. Use them if helpful for quality or if pre-run fueling was light."
-				: "For short steady sessions under 75 minutes, in-session carbs are optional. Use them if helpful for quality or if pre-run fueling was light."
-			: "For a short easy run, in-session carbs are usually unnecessary. Focus on normal meals and hydration.";
+				: "For easy or steady sessions under 75 minutes, in-session carbs are optional. Use them if helpful for quality or if pre-run fueling was light."
+			: "For efforts under 30 minutes, in-session carbs are usually unnecessary. Focus on normal meals and hydration.";
 
 	const planSummary = shouldFuelDuringSession
 		? `Aim around ${carbsPerHourLow}-${carbsPerHourHigh} g/hour and progress toward the upper end if tolerated.`
 		: isFuelingOptional
 			? "No strict carb target required. Optionally take small amounts if it improves how the session feels."
-			: "No in-session carb target needed for this workout; save carbs for harder or longer sessions.";
+			: "No in-session carb target needed for a session this short.";
 
 	return {
 		athleteWeightKg,

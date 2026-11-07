@@ -32,6 +32,10 @@ export function RacePanel(): React.JSX.Element {
 			return { ok: false as const };
 		}
 
+		if (totalSeconds > 20 * 3600) {
+			return { ok: true as const, girl: true as const };
+		}
+
 		const knownDistanceKm = parseDistanceInput(selectedRaceDistance);
 		if (!knownDistanceKm) {
 			return { ok: false as const };
@@ -42,6 +46,7 @@ export function RacePanel(): React.JSX.Element {
 
 		return {
 			ok: true as const,
+			girl: false as const,
 			predictions,
 			paces
 		};
@@ -89,6 +94,10 @@ export function RacePanel(): React.JSX.Element {
 
 			{raceTool.ok === false && "error" in raceTool ? (
 				<p className="toolError">{raceTool.error}</p>
+			) : raceTool.ok && raceTool.girl ? (
+				<div className="scoreboard girlBoard" aria-label="GIRL...">
+					<LedTime time="GIRL..." />
+				</div>
 			) : raceTool.ok ? (
 				<div className="scoreboard">
 					<div className="clocks">

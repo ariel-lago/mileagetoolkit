@@ -148,8 +148,8 @@ body {
 	position: absolute;
 	z-index: 0;
 	width: min(46%, 11rem);
-	right: 0;
-	top: 0;
+	right: -1.15rem;
+	top: -2rem;
 	height: auto;
 	pointer-events: none;
 }
@@ -451,6 +451,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
 	background: transparent;
 }
 
+.girlBoard {
+	display: flex;
+	justify-content: center;
+}
+
 .clocks {
 	display: grid;
 	gap: 1.75rem 1.25rem;
@@ -741,6 +746,16 @@ input.clockInputField {
 
 	.heroTitle {
 		width: fit-content;
+	}
+
+	.shell {
+		padding-left: 4.25rem;
+		padding-right: 4.25rem;
+	}
+
+	.carbGel {
+		right: -3.35rem;
+		top: -2.85rem;
 	}
 
 	.carbHeading {
