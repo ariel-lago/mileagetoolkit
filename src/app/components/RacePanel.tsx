@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { calculatePace, calculateTrainingPaces, formatDuration, projectAllRaceDistances } from "../utils/calculators";
-import { fieldLook, formatPace, parseDistanceInput, parsePositive, readRaceClock } from "./fields";
+import { fieldLook, formatPace, parseDistanceInput, readRaceClock } from "./fields";
 import { LedTime } from "./LedTime";
 
 const raceDistanceOptions = [
@@ -15,7 +15,6 @@ const raceDistanceOptions = [
 export function RacePanel(): React.JSX.Element {
 	const [selectedRaceDistance, setSelectedRaceDistance] = useState("");
 	const [finishTime, setFinishTime] = useState("");
-	const [raceWeeklyVolumeKm, setRaceWeeklyVolumeKm] = useState("");
 
 	const raceTool = useMemo(() => {
 		const clock = readRaceClock(finishTime);
@@ -37,14 +36,7 @@ export function RacePanel(): React.JSX.Element {
 			return { ok: false as const };
 		}
 
-		const weeklyVolumeNum = raceWeeklyVolumeKm.trim() ? parsePositive(raceWeeklyVolumeKm) : undefined;
-		if (raceWeeklyVolumeKm.trim() && weeklyVolumeNum === null) {
-			return { ok: false as const, error: "Weekly volume must be a positive number." };
-		}
-
-		const predictions = projectAllRaceDistances(totalSeconds, knownDistanceKm, {
-			weeklyVolumeKm: weeklyVolumeNum ?? undefined
-		});
+		const predictions = projectAllRaceDistances(totalSeconds, knownDistanceKm);
 		const paces = calculateTrainingPaces(totalSeconds, knownDistanceKm);
 
 		return {
@@ -54,7 +46,7 @@ export function RacePanel(): React.JSX.Element {
 			predictions,
 			paces
 		};
-	}, [selectedRaceDistance, finishTime, raceWeeklyVolumeKm]);
+	}, [selectedRaceDistance, finishTime]);
 
 	return (
 		<section className="panel">
@@ -92,17 +84,6 @@ export function RacePanel(): React.JSX.Element {
 						data-filled={finishTime.trim() ? "true" : undefined}
 					/>
 					<span className="clockHint">hh:mm:ss</span>
-				</label>
-				<label>
-					Weekly volume, optional
-					<input
-						type="number"
-						min={1}
-						value={raceWeeklyVolumeKm}
-						onChange={(event) => setRaceWeeklyVolumeKm(event.target.value)}
-						onFocus={(event) => event.currentTarget.select()}
-						{...fieldLook(raceWeeklyVolumeKm)}
-					/>
 				</label>
 			</div>
 

@@ -238,7 +238,7 @@ label {
 }
 
 .distanceButtons button.active {
-	color: #9d174d;
+	color: #c2176a;
 }
 
 .distanceButtons button.active::before {
@@ -345,7 +345,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .ticks button.active {
-	color: #9d174d;
+	color: #c2176a;
 	font-weight: 700;
 	box-shadow: 0 0 16px rgba(244, 114, 182, 0.85);
 }
@@ -455,7 +455,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 	font-weight: 700;
 	letter-spacing: -0.04em;
 	text-transform: uppercase;
-	color: #9d174d;
+	color: #ff4d9a;
 }
 
 .readoutPace {
@@ -464,7 +464,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 	font-size: 0.95rem;
 	font-weight: 700;
 	text-align: center;
-	color: #9d174d;
+	color: #ff4d9a;
 }
 
 .readoutRange {
@@ -552,7 +552,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 	border: none;
 	border-radius: 999px;
 	background: transparent;
-	color: #9d174d;
+	color: #c2176a;
 	font-family: var(--font-sans), sans-serif;
 	font-size: 1.15rem;
 	font-weight: 700;
@@ -666,7 +666,7 @@ input.clockInputField {
 	font-weight: 700;
 	letter-spacing: -0.04em;
 	text-transform: none;
-	color: #9d174d;
+	color: #ff4d9a;
 }
 
 .fuelFigure {
@@ -680,7 +680,7 @@ input.clockInputField {
 .fuelFigure span {
 	font-size: 1rem;
 	letter-spacing: 0;
-	color: #9d174d;
+	color: #ff4d9a;
 }
 
 .toolError {
