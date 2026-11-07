@@ -67,14 +67,15 @@ export function RacePanel(): React.JSX.Element {
 					Finish time
 					<input
 						type="text"
-						inputMode="numeric"
+						inputMode="text"
 						aria-label="Finish time"
 						placeholder="hh:mm:ss"
 						value={finishTime}
 						onChange={(event) => setFinishTime(event.target.value.replace(/[^\d:]/g, "").slice(0, 8))}
 						onFocus={(event) => event.currentTarget.select()}
 						onBlur={(event) => {
-							const clock = readRaceClock(event.currentTarget.value);
+							const longRace = selectedRaceDistance === "half" || selectedRaceDistance === "marathon";
+							const clock = readRaceClock(event.currentTarget.value, longRace);
 							if (clock.status === "ok") {
 								setFinishTime(clock.display);
 							}

@@ -52,7 +52,7 @@ export function CarbPanel(): React.JSX.Element {
 					Duration
 					<input
 						type="text"
-						inputMode="numeric"
+						inputMode="text"
 						value={duration}
 						onChange={(event) => setDuration(event.target.value.replace(/[^\d:]/g, "").slice(0, 5))}
 						onFocus={(event) => event.currentTarget.select()}

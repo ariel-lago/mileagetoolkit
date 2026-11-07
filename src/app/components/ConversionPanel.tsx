@@ -57,7 +57,7 @@ export function ConversionPanel(): React.JSX.Element {
 						Pace per km
 						<input
 							type="text"
-							inputMode="numeric"
+							inputMode="text"
 							value={pacePerKm}
 							onChange={(event) => setPacePerKm(event.target.value.replace(/[^\d:]/g, "").slice(0, 5))}
 							onFocus={(event) => event.currentTarget.select()}
@@ -69,7 +69,7 @@ export function ConversionPanel(): React.JSX.Element {
 						Pace per mile
 						<input
 							type="text"
-							inputMode="numeric"
+							inputMode="text"
 							value={pacePerMile}
 							onChange={(event) => setPacePerMile(event.target.value.replace(/[^\d:]/g, "").slice(0, 5))}
 							onFocus={(event) => event.currentTarget.select()}

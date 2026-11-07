@@ -86,6 +86,7 @@ body {
 	border-bottom: none;
 	position: relative;
 	z-index: 10;
+	text-align: center;
 }
 
 .heroTitle {
@@ -138,6 +139,7 @@ body {
 	margin: 0 0 1.75rem;
 	border-bottom: none;
 	padding-bottom: 0;
+	text-align: center;
 }
 
 .grid {
@@ -179,6 +181,7 @@ label {
 .distanceButtons {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 0.75rem;
 	margin-bottom: 1.5rem;
 }
@@ -616,6 +619,7 @@ input.clockInputField {
 	letter-spacing: -0.04em;
 	text-transform: none;
 	color: #111111;
+	text-align: center;
 }
 
 .paceGrid {
@@ -693,9 +697,21 @@ input.clockInputField {
 	z-index: -1;
 }
 
-@media (max-width: 560px) {
-	.clocks {
-		grid-template-columns: 1fr 1fr;
+@media (max-width: 760px) {
+	.paceGrid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 480px) {
+	.shell {
+		padding: 2.5rem 1.1rem 6rem;
+	}
+
+	.clocks,
+	.paceGrid,
+	.convertGrid {
+		grid-template-columns: 1fr;
 	}
 
 	.heroTitle {
