@@ -701,6 +701,17 @@ input.clockInputField {
 	z-index: -1;
 }
 
+@media (min-width: 481px) {
+	.hero {
+		display: flex;
+		justify-content: center;
+	}
+
+	.heroTitle {
+		width: fit-content;
+	}
+}
+
 @media (max-width: 760px) {
 	.paceGrid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
