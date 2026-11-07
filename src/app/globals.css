@@ -131,6 +131,38 @@ body {
 	padding-bottom: 0.5rem;
 }
 
+.carbHeading {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.carbPanel h2.toolTitle {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: fit-content;
+	text-align: left;
+}
+
+.carbGel {
+	position: absolute;
+	z-index: 0;
+	width: min(46%, 11rem);
+	right: 0;
+	top: 0;
+	height: auto;
+	pointer-events: none;
+}
+
+.carbPanel .carbHeading,
+.carbPanel .grid,
+.carbPanel .sliderWrap,
+.carbPanel .fuelResult,
+.carbPanel .toolError {
+	position: relative;
+	z-index: 1;
+}
+
 .panel h2.toolTitle {
 	font-family: var(--font-sans), sans-serif;
 	font-size: 2.6rem;
@@ -709,6 +741,10 @@ input.clockInputField {
 
 	.heroTitle {
 		width: fit-content;
+	}
+
+	.carbHeading {
+		justify-content: center;
 	}
 }
 

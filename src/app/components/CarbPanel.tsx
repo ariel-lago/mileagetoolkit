@@ -44,8 +44,14 @@ export function CarbPanel(): React.JSX.Element {
 	}, [duration, intensity]);
 
 	return (
-		<section className="panel">
-			<h2 className="toolTitle">Carb calculator</h2>
+		<section className="panel carbPanel">
+			<div className="carbHeading">
+				<h2 className="toolTitle">
+					<span>Carb</span>
+					<span>calculator</span>
+				</h2>
+			</div>
+			<img className="carbGel" src="/gel.png?v=2" alt="" />
 			<div className="grid">
 				<label>
 					Duration
