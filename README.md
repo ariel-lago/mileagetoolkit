@@ -2,7 +2,38 @@
 
 I had already built some tools for my own running in C: race predictions, training paces, fueling, and unit conversions. They worked, but the only way to use them was in the terminal, and I wanted a cleaner front end than that.
 
-This site is that attempt. I decided to host the same kind of tools on a website, and to give coding with AI agents a shot while building it.
+This site is that attempt. I decided to host the same kind of tools on a website, and to give coding with AI agents a shot while building it. The agents wrote a lot of the wiring. I kept the product decisions: what a result should mean, which inputs belong on the page, and what the numbers are based on.
+
+## Stack
+
+**Next.js 16 (App Router) and React 19.** The whole tool is one page. Each calculator is a client component, and the result updates from the inputs in the browser. There is no backend, because nothing here needs an account, a stored workout, or a request to compute a pace. Next.js still gives me the page shell, the tab icon, and a normal production build I can host.
+
+**TypeScript, with `strict` on.** A finish time, a pace, and a duration are all strings until they are parsed, and after that they are easy to mix up because they are all numbers of seconds. The parsers in `fields.ts` return a result or null, so an unfinished clock like `1:` does not become a one-minute race. The calculator modules export named types (`TrainingPaceZone`, `CarbSessionIntensity`, `RacePredictionRange`) so a fueling effort cannot be passed where a pace zone is expected. I would rather have the compiler catch that than find it by breaking the page.
+
+**One CSS file.** The look is a small system: one typeface, a pink and blue palette, and a layout that changes with the width. I wrote that in `globals.css` instead of utility classes, so the visual rules live in one place. Tailwind is installed because it comes with this Next.js setup. The page does not use it.
+
+**ESLint**, with the Next.js Core Web Vitals and TypeScript configs, so the React and type rules stay on while the page changes.
+
+## How the code is split
+
+The page is only the layout. The math does not import React, so the same functions can run in the browser and in the terminal script.
+
+```text
+src/app/page.tsx                 the page
+src/app/components/              inputs, clocks, and the three tools
+src/app/utils/race.ts            race-time range
+src/app/utils/paces.ts           training paces
+src/app/utils/carbs.ts           in-session fueling
+src/app/utils/units.ts           pace, distance, and time conversions
+src/app/components/fields.ts     what the text fields accept
+scripts/test-running-calculators.ts
+```
+
+Race predictions use Peter Riegel's formula at three exponents (1.04, 1.06, and 1.08), plus an equivalent-pace projection with a small fatigue factor. The clock shows the middle of that range, and the range sits underneath it. Weekly volume still exists in `race.ts` for the terminal script. I took it off the page because it made the finish-time form awkward, and the site does not ask for it.
+
+Training paces are not a published system such as Jack Daniels. They start from those same predictions, then use fixed offsets I checked against my own training: easy is deliberately wide and slow, steady meets the fast end of easy, marathon pace is centered on the predicted marathon pace, and 5K intervals are faster than 5K race pace.
+
+Fueling depends on duration and effort (easy, steady, tempo, race). Under 60 minutes, carbs during the session are optional for every effort. Duration accepts a number of minutes (`66`) or hours and minutes (`1:06`).
 
 ## Run it locally
 
@@ -12,3 +43,11 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+```bash
+npm run build    # production build
+npm run lint
+npm run test:running
+```
+
+`test:running` is an interactive terminal version of the same calculators. It still asks for weekly volume, which the website does not.

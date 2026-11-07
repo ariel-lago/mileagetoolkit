@@ -86,10 +86,13 @@ body {
 	border-bottom: none;
 	position: relative;
 	z-index: 10;
-	text-align: center;
+	text-align: left;
 }
 
 .heroTitle {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 	font-family: var(--font-sans), sans-serif;
 	font-size: 4.5rem;
 	font-weight: 800;
@@ -275,6 +278,7 @@ input[data-filled="true"]:focus {
 /* Control deslizante suave */
 .sliderWrap {
 	margin: 2.5rem 0;
+	padding: 0 3rem;
 }
 
 .sliderWrap label {
@@ -720,6 +724,10 @@ input.clockInputField {
 
 	.toolTitle {
 		font-size: 2.1rem;
+	}
+
+	.sliderWrap {
+		padding: 0 1.6rem;
 	}
 }
 

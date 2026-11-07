@@ -8,7 +8,6 @@ const intensitySteps: Array<{ label: string; value: CarbSessionIntensity }> = [
 	{ label: "Easy", value: "easy" },
 	{ label: "Steady", value: "steady" },
 	{ label: "Tempo", value: "tempo" },
-	{ label: "Hard", value: "hard" },
 	{ label: "Race", value: "race" }
 ];
 

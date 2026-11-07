@@ -8,7 +8,10 @@ export default function Home(): React.JSX.Element {
 	return (
 		<main className="shell">
 			<section className="hero">
-				<h1 className="heroTitle">Mileage Toolkit</h1>
+				<h1 className="heroTitle">
+					<span>Mileage</span>
+					<span>Toolkit</span>
+				</h1>
 			</section>
 			<RacePanel />
 			<CarbPanel />
