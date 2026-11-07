@@ -313,6 +313,10 @@ input[data-filled="true"]:focus {
 	padding: 0 3rem;
 }
 
+.sliderWrap.kitHour {
+	margin: 0.2rem 0 1.4rem;
+}
+
 .sliderWrap label {
 	font-size: 1.35rem;
 	font-weight: 700;
@@ -672,6 +676,61 @@ input.clockInputField {
 
 .paceGrid .readoutLabel {
 	font-size: 1.35rem;
+}
+
+.kitStack {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.1rem;
+}
+
+.kitDays {
+	margin-top: 3.75rem;
+}
+
+.kitLine {
+	margin: 0.55rem 0 0;
+	font-size: 1.45rem;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	text-align: center;
+	color: #111111;
+}
+
+.kitLine span,
+.kitAsk {
+	display: block;
+	margin-bottom: 0.15rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: #ff4d9a;
+}
+
+.kitAsk {
+	margin: 1.4rem 0 0.7rem;
+}
+
+.kitPlace {
+	margin: 0.2rem 0 0;
+	font-size: 1.2rem;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	color: #111111;
+}
+
+.kitConditions {
+	margin: 0.15rem 0 0.85rem;
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #71717a;
+}
+
+.kitWait {
+	text-align: center;
+	margin-top: 1.5rem;
 }
 
 .fuelResult {

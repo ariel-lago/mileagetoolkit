@@ -2,6 +2,7 @@
 
 import { CarbPanel } from "./components/CarbPanel";
 import { ConversionPanel } from "./components/ConversionPanel";
+import { KitPanel } from "./components/KitPanel";
 import { RacePanel } from "./components/RacePanel";
 
 export default function Home(): React.JSX.Element {
@@ -15,6 +16,7 @@ export default function Home(): React.JSX.Element {
 			</section>
 			<RacePanel />
 			<CarbPanel />
+			<KitPanel />
 			<ConversionPanel />
 		</main>
 	);

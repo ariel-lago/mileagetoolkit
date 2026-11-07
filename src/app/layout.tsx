@@ -11,7 +11,7 @@ const syne = Syne({
 
 export const metadata: Metadata = {
 	title: "Mileage Toolkit",
-	description: "Running race prediction, pace zones, and fueling calculator"
+	description: "Running race prediction, pace zones, fueling, and a run kit for the weather"
 };
 
 export default function RootLayout({ children }: { children: ReactNode }): React.JSX.Element {
