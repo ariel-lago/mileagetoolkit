@@ -1,5 +1,18 @@
 # Mileage Toolkit
 
+> **Live Application:** [mileagetoolkit.com](https://mileagetoolkit.com)
+
+<table border="0">
+  <tr>
+    <td width="44%" align="center">
+      <img src="./public/screenshots/race-prediction.png" />
+    </td>
+    <td width="30%" align="center">
+      <img src="./public/screenshots/carb-calculator.png" />
+    </td>
+  </tr>
+</table>
+
 I had already built some tools for my own running in C: race predictions, training paces, fueling, and unit conversions. They worked, but the only way to use them was in the terminal, and I wanted a cleaner front end than that.
 
 Mileage Toolkit is that front end, at [mileagetoolkit.com](https://mileagetoolkit.com). The same kind of tools are on one page, plus a run kit for the weather, which the terminal version never had. I gave coding with AI agents a shot while building it. The agents wrote a lot of the wiring. I kept the product decisions: what a result should mean, which inputs belong on the page, and what the numbers are based on.

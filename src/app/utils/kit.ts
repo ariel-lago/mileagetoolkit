@@ -55,31 +55,35 @@ export function recommendKit(conditions: KitConditions, offsetC: number, session
 		top = "Singlet";
 	} else if (kitC >= 11) {
 		top = "Short sleeve tee";
-	} else if (kitC >= 1) {
+	} else if (kitC >= 6) {
 		top = "Long sleeve tee";
-	} else if (kitC >= -6) {
-		top = "Long sleeve tee and a light shell";
-	} else {
+	} else if (kitC >= 2) {
+		top = "Long sleeve tee and windbreaker";
+	} else if (kitC >= -3) {
 		top = "Long sleeve tee and a warm layer";
+	} else if (kitC >= -9) {
+		top = "Long sleeve tee, a warm layer and a running jacket";
+	} else {
+		top = "This page does not currently support temperatures bellow -9"
 	}
 
-	if (windy && kitC < 8 && top === "Long sleeve tee") {
-		top = "Long sleeve tee and a light shell";
+	if (conditions.raining && kitC < 3) {
+		top = "Long sleeve tee, warm layer and rain jacket";
 	}
 	if (conditions.raining && kitC < 11 && top === "Short sleeve tee") {
-		top = "Short sleeve tee and a light shell";
+		top = "Short sleeve tee and a light rain jacket";
 	}
 	if (conditions.raining && kitC < 11 && top === "Long sleeve tee") {
-		top = "Long sleeve tee and a light shell";
+		top = "Long sleeve tee and rain jacket";
 	}
 
 	const legs = personalC < -2 ? "Tights" : "Shorts";
 
 	if (kitC <= 6 || (windy && kitC < 10)) {
-		extras.push("Buff over ears and face");
+		extras.push("Buff, thin gloves");
 	}
 	if (session === "race" && personalC < 2 && !top.includes("shell") && !top.includes("warm")) {
-		extras.push("Shell to start, then tie it on");
+		extras.push("Old hoodie/jacket to donate at the start");
 	}
 	if (conditions.raining) {
 		extras.push("Cap");
